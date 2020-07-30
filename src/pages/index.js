@@ -1,0 +1,11 @@
+export { default as Home } from "./home";
+export { default as Register } from "./register";
+export { default as CompleteRegistrationPage } from "./completeRegistration";
+export { default as Login } from "./login";
+export { default as UpdatePassword } from "./updatePassword";
+export { default as ForgotPassword } from "./forgotPassword";
+export { default as UpdateProfile } from "./updateProfile";
+export { default as UserProfile } from "./userProfile";
+export { default as Post } from "./post/post";
+export { default as Users } from "./users";
+export { default as NotFoundPage } from "./404";
