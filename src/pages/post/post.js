@@ -1,10 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
 import { toast } from "react-toastify";
-import { AuthContext } from "../../context/authContext";
 import { useQuery, useMutation } from "@apollo/react-hooks";
-import omitDeep from "omit-deep";
 import { ImageUpload, PostCard } from "../../components";
-import { CREATE_POST, USER_POSTS } from "../../graphql";
+import { CREATE_POST, DELETE_POST, GET_USER_POSTS } from "../../graphql";
 
 const initialState = {
   content: "",
@@ -18,15 +16,46 @@ const Post = () => {
   const [values, setValues] = useState(initialState);
   const [loading, setLoading] = useState(false);
 
-  const { data: posts } = useQuery(USER_POSTS);
+  const { data: posts } = useQuery(GET_USER_POSTS);
 
   const { content, image } = values;
 
   const [createPost] = useMutation(CREATE_POST, {
     // Update Cache
-    update: (data) => console.log(data),
+    update: (cache, { data: { createPost } }) => {
+      const { userPosts } = cache.readQuery({
+        query: GET_USER_POSTS,
+      });
+      cache.writeQuery({
+        query: GET_USER_POSTS,
+        data: { userPosts: [createPost, ...userPosts] },
+      });
+    },
     onError: (err) => console.log(err),
   });
+
+  const [deletePost] = useMutation(DELETE_POST, {
+    update: ({ data }) => {
+      console.log("DELETE POST MUTATION", data);
+      toast.error("Post has been deleted.");
+    },
+    onError: (err) => {
+      console.log(err);
+      toast.error("Post has not been deleted.");
+    },
+  });
+
+  const handleDelete = async (postId) => {
+    let confirmDeletion = window.confirm("Confirm Deletion?");
+    if (confirmDeletion) {
+      setLoading(true);
+      deletePost({
+        variables: { postId },
+        refetchQueries: [{ query: GET_USER_POSTS }],
+      });
+      setLoading(false);
+    }
+  };
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -49,7 +78,7 @@ const Post = () => {
           value={content}
           onChange={handleChange}
           name="content"
-          rows="10"
+          rows="5"
           className="md-textarea form-control"
           placeholder="What are you thinking..."
           maxLength="180"
@@ -79,12 +108,16 @@ const Post = () => {
       <div className="row">
         <div className="col-md-9">{createPostForm()}</div>
       </div>
-      <hr />
       <div className="row p-5">
         {posts &&
           posts.userPosts.map((post) => (
-            <div className="col-md-4 pt-5" key={post._id}>
-              <PostCard post={post} />
+            <div className="col-md-6 pt-5" key={post._id}>
+              <PostCard
+                post={post}
+                showUpdateButton={true}
+                showDeleteButton={true}
+                handleDelete={handleDelete}
+              />
             </div>
           ))}
       </div>

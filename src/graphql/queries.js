@@ -37,11 +37,21 @@ export const GET_ALL_POSTS = gql`
   ${POST_INFO}
 `;
 
-export const USER_POSTS = gql`
+export const GET_USER_POSTS = gql`
   query {
     userPosts {
       ...postInfo
     }
   }
+  ${POST_INFO}
+`;
+
+export const GET_SINGLE_POST = gql`
+  query singlePost($postId: String!) {
+    singlePost(postId: $postId) {
+      ...postInfo
+    }
+  }
+
   ${POST_INFO}
 `;

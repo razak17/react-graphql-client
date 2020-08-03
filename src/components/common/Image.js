@@ -14,8 +14,8 @@ const Image = ({ image, handleRemoveImage = (f) => f }) => {
   );
 };
 
-Image.prototypes = {
+Image.propTypes = {
   image: PropTypes.any.isRequired,
-  handleRemoveImage: PropTypes.func.isRequired,
+  handleRemoveImage: PropTypes.func,
 };
 export default Image;

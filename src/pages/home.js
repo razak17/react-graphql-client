@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { useQuery, useLazyQuery } from "@apollo/react-hooks";
 import { useHistory } from "react-router-dom";
+import { PostCard } from "../components";
 
 import { AuthContext } from "../context/authContext";
 import { GET_ALL_POSTS } from "../graphql";
@@ -8,16 +9,9 @@ import { GET_ALL_POSTS } from "../graphql";
 const Home = () => {
   const { data, loading } = useQuery(GET_ALL_POSTS);
   const [fetchPosts, { data: posts }] = useLazyQuery(GET_ALL_POSTS);
-  const { state, dispatch } = useContext(AuthContext);
+  const { state } = useContext(AuthContext);
 
   let history = useHistory();
-
-  const updateUserName = () => {
-    dispatch({
-      type: "LOGGED_IN_USER",
-      payload: "Razak Mo",
-    });
-  };
 
   if (loading) return <p className="p-5">Loading...</p>;
 
@@ -27,14 +21,7 @@ const Home = () => {
         {data &&
           data.allPosts.map((p) => (
             <div className="col-md-4" key={p._id}>
-              <div className="card m-1">
-                <div className="card-body">
-                  <div className="card-title">
-                    <h4>@{p.postedBy.username}</h4>
-                  </div>
-                  <p className="card-text">{p.content}</p>
-                </div>
-              </div>
+              <PostCard post={p} />
             </div>
           ))}
       </div>
@@ -50,10 +37,6 @@ const Home = () => {
       {JSON.stringify(posts)}
       <hr />
       {JSON.stringify(state.user)}
-      <hr />
-      <button className="btn btn-primary" onClick={updateUserName}>
-        Change user name
-      </button>
       <hr />
       {JSON.stringify(history)}
     </div>

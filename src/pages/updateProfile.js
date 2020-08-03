@@ -18,7 +18,8 @@ const UpdateProfile = () => {
   const { username, email, about } = values;
 
   useMemo(() => {
-    if (data) {
+    let isMounted = true;
+    if (isMounted && data) {
       const { username, email, about, images } = data.profile;
       setValues({
         username,
@@ -27,6 +28,9 @@ const UpdateProfile = () => {
         images: omitDeep(images, ["__typename"]),
       });
     }
+    return () => {
+      isMounted = false;
+    };
   }, [data]);
 
   const [updateUser] = useMutation(UPDATE_USER, {});

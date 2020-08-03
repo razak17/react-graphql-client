@@ -18,6 +18,8 @@ import {
   Post,
   Users,
   UserProfile,
+  UpdatePost,
+  SinglePost,
 } from "./pages";
 
 const App = () => {
@@ -51,6 +53,8 @@ const App = () => {
         <PublicRoute path="/register" component={Register} />
         <PublicRoute path="/login" component={Login} />
         <PrivateRoute path="/post/new" component={Post} />
+        <PrivateRoute path="/post/update/:postid" component={UpdatePost} />
+        <Route path="/post/:postid" component={SinglePost} />
         <PrivateRoute path="/profile" component={UpdateProfile} />
         <PrivateRoute path="/update-password" component={UpdatePassword} />
         <Route component={NotFoundPage} />

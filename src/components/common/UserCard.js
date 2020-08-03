@@ -8,7 +8,7 @@ const UserCard = ({ user }) => {
 
   return (
     <div className="card text-center m-1" style={{ minHeight: "375px" }}>
-      <div className="card-body">
+      <div className="card-body p-5">
         <Image image={images[0]} />
         <Link to={`/u/${username}`}>
           <h4 className="text-primary">@{username}</h4>

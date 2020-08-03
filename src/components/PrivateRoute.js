@@ -8,9 +8,13 @@ const PrivateRoute = ({ ...rest }) => {
   const [user, setUser] = useState(false);
 
   useEffect(() => {
-    if (state.user) {
+    let isMounted = true;
+    if (isMounted && state.user) {
       setUser(true);
     }
+    return () => {
+      isMounted = false;
+    };
   }, [state.user]);
 
   const navLinks = () => (
@@ -39,7 +43,7 @@ const PrivateRoute = ({ ...rest }) => {
     <div className="container-fluid pt-5">
       <div className="row">
         <div className="col-md-2">{navLinks()}</div>
-        <div className="col-md-8">
+        <div className="col-md-10">
           <Route {...rest} />
         </div>
       </div>

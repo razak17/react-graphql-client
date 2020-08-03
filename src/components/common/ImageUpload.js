@@ -46,7 +46,7 @@ const ImageUpload = ({
                 const { images } = values;
                 setValues({ ...values, images: [...images, response.data] });
               } else {
-                const { image } = values;
+                // const { image } = values;
                 setValues({ ...values, image: response.data });
               }
             })
@@ -80,7 +80,7 @@ const ImageUpload = ({
           });
           setValues({ ...values, images: filteredImages });
         } else {
-          const { image } = values;
+          // const { image } = values;
           setValues({ ...values, image: { url: "", public_id: "" } });
         }
       })
@@ -107,7 +107,7 @@ const ImageUpload = ({
           </label>
         </div>
       </div>
-      <div className="col-md-10">
+      <div className="col-md-10 p-5">
         {values.image && (
           <Image
             image={values.image}
