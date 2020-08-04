@@ -20,6 +20,7 @@ import {
   UserProfile,
   UpdatePost,
   SinglePost,
+  SearchResults,
 } from "./pages";
 
 const App = () => {
@@ -50,13 +51,22 @@ const App = () => {
         <Route path="/forgot-password" component={ForgotPassword} />
         <Route exact path="/users" component={Users} />
         <Route exact path="/u/:username" component={UserProfile} />
-        <PublicRoute path="/register" component={Register} />
-        <PublicRoute path="/login" component={Login} />
-        <PrivateRoute path="/post/new" component={Post} />
-        <PrivateRoute path="/post/update/:postid" component={UpdatePost} />
-        <Route path="/post/:postid" component={SinglePost} />
-        <PrivateRoute path="/profile" component={UpdateProfile} />
-        <PrivateRoute path="/update-password" component={UpdatePassword} />
+        <Route exact path="/search/:query" component={SearchResults} />
+        <Route exact path="/post/:postid" component={SinglePost} />
+        <PublicRoute exact path="/register" component={Register} />
+        <PublicRoute exact path="/login" component={Login} />
+        <PrivateRoute exact path="/post/new" component={Post} />
+        <PrivateRoute
+          exact
+          path="/post/update/:postid"
+          component={UpdatePost}
+        />
+        <PrivateRoute exact path="/profile" component={UpdateProfile} />
+        <PrivateRoute
+          exact
+          path="/update-password"
+          component={UpdatePassword}
+        />
         <Route component={NotFoundPage} />
       </Switch>
     </ApolloProvider>

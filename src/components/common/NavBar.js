@@ -1,7 +1,9 @@
-import React, { useContext, Fragment } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { auth } from "firebase";
 import { AuthContext } from "../../context/authContext";
+import Search from "./Search";
+import NavLinks from "./NavLinks";
 
 const NavBar = () => {
   const { state, dispatch } = useContext(AuthContext);
@@ -34,57 +36,8 @@ const NavBar = () => {
       </button>
 
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul className="navbar-nav mr-auto">
-          {user && (
-            <li className="nav-item active">
-              <Link className="nav-link" to="/profile">
-                Profile
-              </Link>
-            </li>
-          )}
-          {user && (
-            <li className="nav-item active">
-              <Link className="nav-link" to="/users">
-                Explore
-              </Link>
-            </li>
-          )}
-          {!user && (
-            <Fragment>
-              <li className="nav-item active">
-                <Link className="nav-link" to="/login">
-                  Login
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/register">
-                  Register
-                </Link>
-              </li>
-            </Fragment>
-          )}
-          {user && (
-            <li className="nav-item">
-              <a onClick={logout} href="/login" className="nav-item nav-link">
-                Logout
-              </a>
-            </li>
-          )}
-        </ul>
-        <form className="form-inline my-2 my-lg-0">
-          <input
-            className="form-control mr-sm-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
-          <button
-            className="btn btn-outline-success my-2 my-sm-0"
-            type="submit"
-          >
-            Search
-          </button>
-        </form>
+        <NavLinks user={user} logout={logout} />
+        <Search />
       </div>
     </nav>
   );

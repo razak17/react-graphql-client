@@ -30,7 +30,7 @@ const Home = () => {
       <hr />
       {JSON.stringify(posts)}
       <hr />
-      {/* {JSON.stringify(state.user)} */}
+      {JSON.stringify(state.user)}
       <hr />
       {JSON.stringify(history)}
     </div>

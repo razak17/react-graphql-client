@@ -60,3 +60,12 @@ export const GET_SINGLE_POST = gql`
 
   ${POST_INFO}
 `;
+
+export const GET_SEARCH_RESULTS = gql`
+  query search($query: String!) {
+    search(query: $query) {
+      ...postInfo
+    }
+  }
+  ${POST_INFO}
+`;

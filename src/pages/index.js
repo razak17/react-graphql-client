@@ -9,5 +9,6 @@ export { default as UserProfile } from "./userProfile";
 export { default as Post } from "./post/post";
 export { default as UpdatePost } from "./post/updatePost";
 export { default as SinglePost } from "./post/singlePost";
+export { default as SearchResults } from "./searchResults";
 export { default as Users } from "./users";
 export { default as NotFoundPage } from "./404";

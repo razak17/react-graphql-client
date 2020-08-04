@@ -17,7 +17,7 @@ const PostCard = ({
         <Image image={image} />
       </Link>
       <div className="card-body p-2">
-        <Link to={`u/${postedBy.username}`}>
+        <Link to={`/u/${postedBy.username}`}>
           <h4 className="text-primary">@{postedBy.username}</h4>
         </Link>
         <hr />
