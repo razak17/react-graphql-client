@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
 import { useLazyQuery, useMutation } from "@apollo/react-hooks";
 import omitDeep from "omit-deep";
-import { ImageUpload, PostCard } from "../../components";
+import { ImageUpload } from "../../components";
 import { GET_SINGLE_POST, UPDATE_POST } from "../../graphql";
 
 const UpdatePost = () => {
@@ -17,10 +17,8 @@ const UpdatePost = () => {
 
   const [getSinglePost, { data: singlePost }] = useLazyQuery(GET_SINGLE_POST);
   const [updatePost] = useMutation(UPDATE_POST);
-
   const [loading, setLoading] = useState(false);
   const { content, image } = values;
-
   const { postid } = useParams();
 
   useMemo(() => {

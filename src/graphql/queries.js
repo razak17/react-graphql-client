@@ -28,9 +28,14 @@ export const GET_USER_PROFILE = gql`
   ${USER_INFO}
 `;
 
+export const GET_TOTAL_POSTS = gql`
+  query {
+    totalPosts
+  }
+`;
 export const GET_ALL_POSTS = gql`
-  {
-    allPosts {
+  query allPosts($page: Int!) {
+    allPosts(page: $page) {
       ...postInfo
     }
   }

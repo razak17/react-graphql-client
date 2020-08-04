@@ -23,7 +23,6 @@ const SinglePost = () => {
     if (singlePost) {
       const { _id, content, image, postedBy } = singlePost.singlePost;
       setValues({
-        ...values,
         _id,
         content,
         image: omitDeep(image, ["__typename"]),

@@ -12,12 +12,11 @@ const PostCard = ({
   const { image, content, postedBy } = post;
   const history = useHistory();
   return (
-    <div className="card text-center m-2" style={{ minHeight: "375px" }}>
-      <div className="card-body p-5">
-        <Link to={`/post/${post._id}`}>
-          <Image image={image} />
-        </Link>
-
+    <div className="card h-100 text-center m-2" style={{ minHeight: "300px" }}>
+      <Link to={`/post/${post._id}`}>
+        <Image image={image} />
+      </Link>
+      <div className="card-body p-2">
         <Link to={`u/${postedBy.username}`}>
           <h4 className="text-primary">@{postedBy.username}</h4>
         </Link>

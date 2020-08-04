@@ -5,6 +5,7 @@ export { default as TextInput } from "./common/TextInput";
 export { default as EmailInput } from "./common/EmailInput";
 export { default as PasswordInput } from "./common/PasswordInput";
 export { default as LoadingRedirect } from "./common/LoadingRedirect";
+export { default as PostPagination } from "./common/PostPagination";
 
 export { default as AuthForm } from "./forms/AuthForm";
 export { default as UpdateProfileForm } from "./forms/UpdateProfileForm";
